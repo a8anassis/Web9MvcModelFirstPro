@@ -45,7 +45,7 @@ COPY --from=build /app .
 # Είναι documentation — λέει σε όποιον διαβάζει το Dockerfile "αυτό το container χρησιμοποιεί port 8080". 
 # Δεν ανοίγει πραγματικά port, αυτό γίνεται στο docker run -p ή στο docker-compose
 # στο .NET 8+ ο Kestrel ακούει σε port 8080 by default. Μέσα σε Docker container: Δεν υπάρχει launchSettings — αγνοείται εντελώς
-EXPOSE 8080
+# EXPOSE 8081
 
 # Όρισε τι τρέχει ο container: dotnet SchoolApp.dll
 # Η μορφή με τα brackets ["dotnet", "SchoolApp.dll"] λέγεται exec form — 
