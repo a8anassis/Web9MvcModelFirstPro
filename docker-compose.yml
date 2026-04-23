@@ -15,17 +15,17 @@ services:
       timeout: 5s
       retries: 5
 
-  # webapp:
-  #   build: .
-  #   container_name: schoolmvc9-app
-  #   ports:
-  #     - "${APP_PORT:-8081}:8080"              # port mapping - host port από .env ή default 8081, container port 8080 (όπως ορίζεται στο appsettings.json)
-  #   environment:
-  #     ASPNETCORE_ENVIRONMENT: "${ASPNETCORE_ENVIRONMENT}"
-  #     ConnectionStrings__DevConnection: "Server=${DB_HOST};Database=${DB_NAME};User=${DB_USER};Password=${DB_USER_PASSWORD};MultipleActiveResultSets=true;TrustServerCertificate=True"
-  #   depends_on:
-  #     sqlserver:
-  #       condition: service_healthy
+  webapp:
+    build: .
+    container_name: schoolmvc9-app
+    ports:
+      - "${APP_PORT:-8081}:8080"              # port mapping - host port από .env ή default 8081, container port 8080 (όπως ορίζεται στο appsettings.json)
+    environment:
+       ASPNETCORE_ENVIRONMENT: "${ASPNETCORE_ENVIRONMENT}"
+       ConnectionStrings__DevConnection: "Server=${DB_HOST};Database=${DB_NAME};User=${DB_USER};Password=${DB_USER_PASSWORD};MultipleActiveResultSets=true;TrustServerCertificate=True"
+    depends_on:
+       sqlserver:
+         condition: service_healthy
 
 volumes:
   sqlserver-data:
