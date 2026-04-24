@@ -82,7 +82,7 @@ namespace SchoolApp.Services
             }
         }
 
-        public async Task<User?> VerifyAndGetUserAsync(UserLoginDTO credentials)
+        public async Task<User> VerifyAndGetUserAsync(UserLoginDTO credentials)
         {
             User? user = null;
             try
