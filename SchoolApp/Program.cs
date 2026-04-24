@@ -43,10 +43,10 @@ namespace SchoolApp
                    options.SlidingExpiration = true;   // reset timeout, 30 min of idle
                });
 
-            //builder.Services.AddAuthorizationBuilder()
-            //    .SetFallbackPolicy(new AuthorizationPolicyBuilder()
-            //    .RequireAuthenticatedUser()
-            //    .Build());
+            builder.Services.AddAuthorizationBuilder()
+                .SetFallbackPolicy(new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build());
             //.AddPolicy("CanInsertTeacher", policy =>
             //    policy.RequireClaim("Capability", "INSERT_TEACHER"))
             //.AddPolicy("CanViewTeachers", policy =>
@@ -64,13 +64,13 @@ namespace SchoolApp
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            app.UseHttpsRedirection(); 
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.MapStaticAssets();
+            app.MapStaticAssets().AllowAnonymous();
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
