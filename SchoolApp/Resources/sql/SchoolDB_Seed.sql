@@ -1,25 +1,10 @@
--- ============================================
--- SchoolDB - Seed Data
--- Roles, Capabilities, Role-Capability mappings
--- ============================================
-
-USE [SchoolMVC9];
-GO
-
--- ============================================
--- Insert Roles
--- ============================================
 INSERT INTO [dbo].[Roles] ([Name])
 VALUES
     ('ADMIN'),
     ('EMPLOYEE'),
     ('TEACHER'),
     ('STUDENT');
-GO
 
--- ============================================
--- Insert Capabilities
--- ============================================
 INSERT INTO [dbo].[Capabilities] ([Name], [Description])
 VALUES
     ('INSERT_TEACHER', 'Create a new teacher'),
@@ -39,24 +24,15 @@ VALUES
     ('VIEW_COURSE', 'View course'),
     ('EDIT_COURSE', 'Modify existing course'),
     ('DELETE_COURSE', 'Remove a course');
-GO
 
--- ============================================
--- ADMIN: all capabilities
--- ============================================
-INSERT INTO [dbo].[RolesCapabilities] ([RoleId], [CapabilityId])
+INSERT INTO [dbo].[RolesCapabilities] ([RolesId], [CapabilitiesId])
 SELECT r.[Id], c.[Id]
 FROM [dbo].[Roles] r
 CROSS JOIN [dbo].[Capabilities] c
 WHERE r.[Name] = 'ADMIN';
-GO
 
--- ============================================
--- EMPLOYEE: VIEW_TEACHERS, VIEW_TEACHER,
---           VIEW_STUDENTS, VIEW_STUDENT,
---           VIEW_COURSES, VIEW_COURSE
--- ============================================
-INSERT INTO [dbo].[RolesCapabilities] ([RoleId], [CapabilityId])
+
+INSERT INTO [dbo].[RolesCapabilities] ([RolesId], [CapabilitiesId])
 SELECT r.[Id], c.[Id]
 FROM [dbo].[Roles] r
 CROSS JOIN [dbo].[Capabilities] c
@@ -64,26 +40,20 @@ WHERE r.[Name] = 'EMPLOYEE'
   AND c.[Name] IN ('VIEW_TEACHERS', 'VIEW_TEACHER',
                     'VIEW_STUDENTS', 'VIEW_STUDENT',
                     'VIEW_COURSES', 'VIEW_COURSE');
-GO
 
--- ============================================
--- TEACHER: VIEW_ONLY_TEACHER
--- ============================================
-INSERT INTO [dbo].[RolesCapabilities] ([RoleId], [CapabilityId])
+
+INSERT INTO [dbo].[RolesCapabilities] ([RolesId], [CapabilitiesId])
 SELECT r.[Id], c.[Id]
 FROM [dbo].[Roles] r
 CROSS JOIN [dbo].[Capabilities] c
 WHERE r.[Name] = 'TEACHER'
   AND c.[Name] IN ('VIEW_ONLY_TEACHER');
-GO
 
--- ============================================
--- STUDENT: VIEW_ONLY_STUDENT
--- ============================================
-INSERT INTO [dbo].[RolesCapabilities] ([RoleId], [CapabilityId])
+
+INSERT INTO [dbo].[RolesCapabilities] ([RolesId], [CapabilitiesId])
 SELECT r.[Id], c.[Id]
 FROM [dbo].[Roles] r
 CROSS JOIN [dbo].[Capabilities] c
 WHERE r.[Name] = 'STUDENT'
   AND c.[Name] IN ('VIEW_ONLY_STUDENT');
-GO
+
