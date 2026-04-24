@@ -124,7 +124,8 @@ namespace SchoolApp.Controllers
             }
         }
 
-        [HttpGet]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         [Authorize]
         public async Task<IActionResult> Logout()
         {
