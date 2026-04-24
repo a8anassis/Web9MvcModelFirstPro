@@ -69,7 +69,7 @@ namespace SchoolApp.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return View();
+                    return View(credentials);
                 }
 
                 var user = await applicationService.UserService.VerifyAndGetUserAsync(credentials);
@@ -120,14 +120,14 @@ namespace SchoolApp.Controllers
             catch (EntityNotAuthorizedException ex)
             {
                 logger.LogWarning(ex, "Unauthorized login attempt for username: {Username}", credentials.Username);
-                ViewData["ValidateMessage"] = "Bad Credentials. Username or password is invalid.";
-                return View();
+                ViewData["ValidateMessage"] = "Bad Credentials. Username or password is invalid";
+                return View(credentials);
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, "Error during login");
-                ViewData["ValidateMessage"] = "An unexpected error occurred.";
-                return View();
+                ViewData["ValidateMessage"] = ex.Message;
+                return View(credentials);
             }
         }
 
